@@ -5,6 +5,7 @@
  */
 package DATA;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -41,6 +42,7 @@ public class IOImage {
             }
             File archivo = seleccion.getSelectedFile();
             BufferedImage bfi = ImageIO.read(archivo);
+                      
             return bfi.getScaledInstance(bfi.getWidth(),bfi.getHeight(),BufferedImage.TYPE_INT_RGB);
         } catch (IOException ex) {
             Logger.getLogger(IOImage.class.getName()).log(Level.SEVERE, null, ex);

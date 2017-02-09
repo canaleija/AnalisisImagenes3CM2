@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import MUESTREO.InstanciaEnGrises;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -20,9 +21,12 @@ public class JInternalFrameImagen extends javax.swing.JInternalFrame {
      */
     public JInternalFrameImagen(Image imagenOriginal) {
         initComponents();
-        this.imagenOriginal = imagenOriginal;
-        // mandar al jlabel
-        this.jLabelImagen.setIcon(new ImageIcon(imagenOriginal));
+        InstanciaEnGrises aux = new InstanciaEnGrises(imagenOriginal);
+        this.imagenOriginal = aux.getImagenGrises();
+        // mandar la imagen al jlabel
+        this.jLabelImagen.setIcon(new ImageIcon(this.imagenOriginal));
+        // re dimensionar el tamaño del internalframe
+        setSize(imagenOriginal.getWidth(null), imagenOriginal.getHeight(null));
     }
 
     /**
@@ -36,6 +40,8 @@ public class JInternalFrameImagen extends javax.swing.JInternalFrame {
 
         jLabelImagen = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Imagen");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

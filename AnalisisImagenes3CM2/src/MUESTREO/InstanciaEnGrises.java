@@ -16,11 +16,12 @@ import java.awt.image.BufferedImage;
  */
 public class InstanciaEnGrises {
     private Image imagenOriginal;
+    private Image imagenGrises;
     
     public InstanciaEnGrises(Image imagenOriginal ) {
         this.imagenOriginal = imagenOriginal;
     }
-    public Image getImagenGrises(){
+    public Image generaImagenGrises(){
       
         BufferedImage aux = ImageType.toBufferedImage(imagenOriginal);
         // recorrer pixel por pixel la imagen
@@ -32,8 +33,15 @@ public class InstanciaEnGrises {
               aux.setRGB(x, y, color.getRGB());
             }
             
-        
-        return ImageType.toImage(aux);
+        this.imagenGrises = ImageType.toImage(aux);
+        return this.getImagenGrises();
+    }
+
+    /**
+     * @return the imagenGrises
+     */
+    public Image getImagenGrises() {
+        return imagenGrises;
     }
     
     

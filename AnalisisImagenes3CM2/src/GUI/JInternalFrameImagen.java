@@ -24,9 +24,9 @@ public class JInternalFrameImagen extends javax.swing.JInternalFrame {
         initComponents();
         InstanciaEnGrises aux = new InstanciaEnGrises(imagenOriginal);
         this.imagenOriginal = aux.generaImagenGrises();
-        InstanciaImagenBinarizada ib = new InstanciaImagenBinarizada(aux, 234);
+        aux.graficarHistograma();
         // mandar la imagen al jlabel
-        this.jLabelImagen.setIcon(new ImageIcon(ib.generarImagenBinarizada()));
+        this.jLabelImagen.setIcon(new ImageIcon(this.imagenOriginal));
         // re dimensionar el tamaño del internalframe
         setSize(imagenOriginal.getWidth(null), imagenOriginal.getHeight(null));
     }

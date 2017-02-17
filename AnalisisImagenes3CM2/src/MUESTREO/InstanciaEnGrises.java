@@ -32,9 +32,10 @@ public class InstanciaEnGrises {
             for (int y=0; y < aux.getHeight();y++){
               Color color = new Color(aux.getRGB(x, y));
               int gris = (color.getRed()+color.getGreen()+color.getBlue())/3;
+             
               // acumular la frecuencia del tono de gris
               this.histrograma[gris]++;
-              color = new Color(gris, gris, gris);
+              color = new Color(gris,gris,gris);
               aux.setRGB(x, y, color.getRGB());
             }
             

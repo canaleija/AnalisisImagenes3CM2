@@ -6,7 +6,11 @@
 package GUI;
 
 import DATA.IOImage;
+import MUESTREO.InstanciaEnGrises;
 import java.awt.Image;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,6 +38,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemAbrirImagen = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,6 +65,14 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemAbrirImagen);
 
+        jMenuItem1.setText("Análisis por Color");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -82,17 +95,31 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemAbrirImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirImagenActionPerformed
-        // crear el cuadro de dialogo para seleccionar la imagen
-        Image imagenOriginal = IOImage.abrirImagen();
-        // crear un nuevo internalFrameImagen y lo agregará el escritorio de la aplicación
-        
-        // creamos la instancia del internalframeimagen
-        JInternalFrameImagen aux = new JInternalFrameImagen(imagenOriginal);
+        try {
+            // crear el cuadro de dialogo para seleccionar la imagen
+            Image imagenOriginal = IOImage.abrirImagen();
+            // crear un nuevo internalFrameImagen y lo agregará el escritorio de la aplicación
+            InstanciaEnGrises grises = new InstanciaEnGrises(imagenOriginal);
+            
+            
+            // creamos la instancia del internalframeimagen
+            JInternalFrameImagen aux = new JInternalFrameImagen(grises.generaImagenGrises());
+            grises.graficarHistograma();
+            jDesktopPane1.add(aux);
+            
+            aux.setVisible(true);
+            IOImage.guardarImagen(grises.getImagenGrises());
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemAbrirImagenActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        AnalisisxColorJnternalFrame aux = new AnalisisxColorJnternalFrame();
         jDesktopPane1.add(aux);
         
         aux.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItemAbrirImagenActionPerformed
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +161,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemAbrirImagen;
     // End of variables declaration//GEN-END:variables
 }

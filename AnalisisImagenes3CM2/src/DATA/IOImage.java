@@ -50,4 +50,17 @@ public class IOImage {
         return null;
     }
     
+    public static void guardarImagen(Image imagen) throws IOException{
+        // convertimos a buffered
+        BufferedImage bi = ImageType.toBufferedImage(imagen);
+        // declaramos la ventana para seleccionar la ruta 
+        JFileChooser ventana = new JFileChooser();
+        int res = ventana.showSaveDialog(null);
+        if (res == JFileChooser.APPROVE_OPTION){
+           File archivo = ventana.getSelectedFile();
+           ImageIO.write(bi,"jpg", archivo);
+        }
+          
+    }
+    
 }

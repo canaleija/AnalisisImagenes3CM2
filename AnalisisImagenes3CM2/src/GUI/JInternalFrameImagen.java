@@ -22,11 +22,9 @@ public class JInternalFrameImagen extends javax.swing.JInternalFrame {
      */
     public JInternalFrameImagen(Image imagenOriginal) {
         initComponents();
-        InstanciaEnGrises aux = new InstanciaEnGrises(imagenOriginal);
-        this.imagenOriginal = aux.generaImagenGrises();
-        aux.graficarHistograma();
-        // mandar la imagen al jlabel
-        this.jLabelImagen.setIcon(new ImageIcon(this.imagenOriginal));
+        this.imagenOriginal = imagenOriginal;
+        
+        this.jLabelImagen.setIcon(new ImageIcon(this.getImagenOriginal()));
         // re dimensionar el tamaño del internalframe
         setSize(imagenOriginal.getWidth(null), imagenOriginal.getHeight(null));
     }
@@ -65,7 +63,28 @@ public class JInternalFrameImagen extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelImagen;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the imagenOriginal
+     */
+    public Image getImagenOriginal() {
+        return imagenOriginal;
+    }
+
+    /**
+     * @param imagenOriginal the imagenOriginal to set
+     */
+    public void setImagenOriginal(Image imagenOriginal) {
+        this.imagenOriginal = imagenOriginal;
+        // modificar el label con la imagen
+        this.jLabelImagen.setIcon(new ImageIcon(this.getImagenOriginal()));
+        // re dimensionar el tamaño del internalframe
+        setSize(imagenOriginal.getWidth(null), imagenOriginal.getHeight(null));
+    }
 }

@@ -65,7 +65,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemAbrirImagen);
 
-        jMenuItem1.setText("Análisis por Color");
+        jMenuItem1.setText("Binarización");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -95,30 +95,28 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemAbrirImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAbrirImagenActionPerformed
-        try {
+       
             // crear el cuadro de dialogo para seleccionar la imagen
             Image imagenOriginal = IOImage.abrirImagen();
-            // crear un nuevo internalFrameImagen y lo agregará el escritorio de la aplicación
-            InstanciaEnGrises grises = new InstanciaEnGrises(imagenOriginal);
-            
-            
+                        
             // creamos la instancia del internalframeimagen
-            JInternalFrameImagen aux = new JInternalFrameImagen(grises.generaImagenGrises());
-            grises.graficarHistograma();
+            JInternalFrameImagen aux = new JInternalFrameImagen(imagenOriginal);
+            
             jDesktopPane1.add(aux);
             
             aux.setVisible(true);
-            IOImage.guardarImagen(grises.getImagenGrises());
-        } catch (IOException ex) {
-            Logger.getLogger(PrincipalJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
     }//GEN-LAST:event_jMenuItemAbrirImagenActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        AnalisisxColorJnternalFrame aux = new AnalisisxColorJnternalFrame();
-        jDesktopPane1.add(aux);
-        
-        aux.setVisible(true);
+       JInternalFrameImagen internalImagen = (JInternalFrameImagen)jDesktopPane1.getSelectedFrame();
+       Image imagenReferencia = internalImagen.getImagenOriginal();
+       // necesito obtener la referencia del internalframe con la imagen
+       // se abra el frame de binarizacion
+       BinarizacionInternalFrame internalBin = new BinarizacionInternalFrame(imagenReferencia);
+       this.jDesktopPane1.add(internalBin);
+       internalBin.setVisible(true);
+       
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

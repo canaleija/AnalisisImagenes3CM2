@@ -7,6 +7,7 @@ package MUESTREO;
 
 import DATA.ImageType;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
@@ -16,39 +17,43 @@ import java.awt.image.BufferedImage;
  */
 public class InstanciaImagenBinarizada {
     
-    private Object imagenGrises;
-    private int umbral;
+    private BufferedImage imagenGrisesOriginal;
+  
 
-    public InstanciaImagenBinarizada(Object imagenGrises, int umbral) {
-        this.imagenGrises = imagenGrises;
-        this.umbral = umbral;
-    }
-    public Image generarImagenBinarizada(){
-    
-        if (this.imagenGrises instanceof InstanciaEnGrises){
-           InstanciaEnGrises aux = (InstanciaEnGrises)this.imagenGrises;
+    public InstanciaImagenBinarizada(Object imagenGrises) {
+      
+         if (imagenGrises instanceof InstanciaEnGrises){
+           InstanciaEnGrises aux = (InstanciaEnGrises)imagenGrises;
            // modificar la imagen 
-           BufferedImage imagenGris = ImageType.toBufferedImage(aux.getImagenGrises()) ;
-           return binarizar(imagenGris);
+           this.imagenGrisesOriginal = ImageType.toBufferedImage(aux.getImagenGrises()) ;
+          
         } 
-        if (this.imagenGrises instanceof Image){
-           Image auxImagen = (Image) this.imagenGrises;
+        if (imagenGrises instanceof Image){
+           Image auxImagen = (Image)imagenGrises;
            InstanciaEnGrises aux = new InstanciaEnGrises(auxImagen);
-           BufferedImage imagenGris = ImageType.toBufferedImage(aux.generaImagenGrises()) ;
-           return binarizar(imagenGris);
-           
-        
+           this.imagenGrisesOriginal = ImageType.toBufferedImage(aux.generaImagenGrises()) ;
+               
         }
-        return null;
+     
+    }
+    public Image generarImagenBinarizada(int umbral){
+         // Create a buffered image with transparency
+    BufferedImage aux = new BufferedImage(imagenGrisesOriginal.getWidth(null),imagenGrisesOriginal.getHeight(null), BufferedImage.TYPE_INT_RGB);
+
+    // Draw the image on to the buffered image
+    Graphics2D bGr = aux.createGraphics();
+    bGr.drawImage(imagenGrisesOriginal, 0, 0, null);
+    bGr.dispose();
+       return binarizar(aux, umbral);
     }
 
-    private Image binarizar(BufferedImage imagenGris){
+    private Image binarizar(BufferedImage imagenGris,int umbral){
     
         for (int x=0; x<imagenGris.getWidth();x++)
                for (int y=0; y<imagenGris.getHeight();y++){
                  int rgb = imagenGris.getRGB(x, y);
                  Color color = new Color(rgb);
-                 if (color.getRed()<this.umbral){
+                 if (color.getRed()<umbral){
                    // mandamos el rgb del pixel a negro
                    color = new Color(0, 0, 0);
                   

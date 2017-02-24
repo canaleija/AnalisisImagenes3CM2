@@ -26,16 +26,17 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jLabelImagenBin" alignment="0" max="32767" attributes="0"/>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jSliderUmbralS" min="-2" pref="560" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jSliderUmbral" min="-2" pref="560" max="-2" attributes="0"/>
+                      <Component id="jLabelUmbralI" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="336" max="-2" attributes="0"/>
+                      <Component id="jLabelUmbralS" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="jLabelUmbral" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jSliderUmbralI" min="-2" pref="560" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButton1" pref="110" max="32767" attributes="0"/>
@@ -46,16 +47,21 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jLabelImagenBin" pref="350" max="32767" attributes="0"/>
+              <Component id="jLabelImagenBin" pref="345" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jButton1" min="-2" pref="64" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabelUmbral" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jSliderUmbral" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelUmbralI" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelUmbralS" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jSliderUmbralI" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jSliderUmbralS" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -64,14 +70,14 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabelImagenBin">
     </Component>
-    <Component class="javax.swing.JSlider" name="jSliderUmbral">
+    <Component class="javax.swing.JSlider" name="jSliderUmbralI">
       <Properties>
         <Property name="maximum" type="int" value="255"/>
         <Property name="snapToTicks" type="boolean" value="true"/>
-        <Property name="value" type="int" value="125"/>
+        <Property name="value" type="int" value="10"/>
       </Properties>
       <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderUmbralStateChanged"/>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderUmbralIStateChanged"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
@@ -79,9 +85,24 @@
         <Property name="text" type="java.lang.String" value="Aplicar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelUmbral">
+    <Component class="javax.swing.JLabel" name="jLabelUmbralI">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Umbral: 125"/>
+        <Property name="text" type="java.lang.String" value="Umbral I: 10"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSlider" name="jSliderUmbralS">
+      <Properties>
+        <Property name="maximum" type="int" value="255"/>
+        <Property name="snapToTicks" type="boolean" value="true"/>
+        <Property name="value" type="int" value="245"/>
+      </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSliderUmbralSStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelUmbralS">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Umbral S: 245"/>
       </Properties>
     </Component>
   </SubComponents>

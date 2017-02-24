@@ -28,6 +28,7 @@ public class BinarizacionInternalFrame extends javax.swing.JInternalFrame {
         
         this.jLabelImagenBin.setIcon(new ImageIcon(grises.generaImagenGrises()));
         this.binarizacion = new InstanciaImagenBinarizada(grises.getImagenGrises());
+        grises.graficarHistograma();
     }
 
     /**
@@ -40,27 +41,40 @@ public class BinarizacionInternalFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabelImagenBin = new javax.swing.JLabel();
-        jSliderUmbral = new javax.swing.JSlider();
+        jSliderUmbralI = new javax.swing.JSlider();
         jButton1 = new javax.swing.JButton();
-        jLabelUmbral = new javax.swing.JLabel();
+        jLabelUmbralI = new javax.swing.JLabel();
+        jSliderUmbralS = new javax.swing.JSlider();
+        jLabelUmbralS = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
 
-        jSliderUmbral.setMaximum(255);
-        jSliderUmbral.setSnapToTicks(true);
-        jSliderUmbral.setValue(125);
-        jSliderUmbral.addChangeListener(new javax.swing.event.ChangeListener() {
+        jSliderUmbralI.setMaximum(255);
+        jSliderUmbralI.setSnapToTicks(true);
+        jSliderUmbralI.setValue(10);
+        jSliderUmbralI.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSliderUmbralStateChanged(evt);
+                jSliderUmbralIStateChanged(evt);
             }
         });
 
         jButton1.setText("Aplicar");
 
-        jLabelUmbral.setText("Umbral: 125");
+        jLabelUmbralI.setText("Umbral I: 10");
+
+        jSliderUmbralS.setMaximum(255);
+        jSliderUmbralS.setSnapToTicks(true);
+        jSliderUmbralS.setValue(245);
+        jSliderUmbralS.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSliderUmbralSStateChanged(evt);
+            }
+        });
+
+        jLabelUmbralS.setText("Umbral S: 245");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,13 +82,15 @@ public class BinarizacionInternalFrame extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabelImagenBin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSliderUmbralS, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jSliderUmbral, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabelUmbral)))
+                        .addComponent(jLabelUmbralI)
+                        .addGap(336, 336, 336)
+                        .addComponent(jLabelUmbralS)
+                        .addGap(12, 12, 12))
+                    .addComponent(jSliderUmbralI, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
                 .addContainerGap())
@@ -82,33 +98,51 @@ public class BinarizacionInternalFrame extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabelImagenBin, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addComponent(jLabelImagenBin, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelUmbral)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSliderUmbral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelUmbralI)
+                            .addComponent(jLabelUmbralS))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSliderUmbralI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSliderUmbralS, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jSliderUmbralStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderUmbralStateChanged
-       int valor = jSliderUmbral.getValue();
-       jLabelUmbral.setText("Umbral: "+valor);
-       Image resultado = this.binarizacion.generarImagenBinarizada(valor);
+    private void jSliderUmbralIStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderUmbralIStateChanged
+       int valorI = jSliderUmbralI.getValue();
+       int valorS = jSliderUmbralS.getValue();
+       jLabelUmbralI.setText("UmbralI: "+valorI);
+       jLabelUmbralS.setText("UmbralS: "+valorS);
+       Image resultado = this.binarizacion.generarImagenBinarizada(valorI,valorS);
        jLabelImagenBin.setIcon(new ImageIcon(resultado));
        
-    }//GEN-LAST:event_jSliderUmbralStateChanged
+    }//GEN-LAST:event_jSliderUmbralIStateChanged
+
+    private void jSliderUmbralSStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderUmbralSStateChanged
+       int valorI = jSliderUmbralI.getValue();
+       int valorS = jSliderUmbralS.getValue();
+       jLabelUmbralI.setText("UmbralI: "+valorI);
+       jLabelUmbralS.setText("UmbralS: "+valorS);
+       Image resultado = this.binarizacion.generarImagenBinarizada(valorI,valorS);
+       jLabelImagenBin.setIcon(new ImageIcon(resultado));
+       
+    }//GEN-LAST:event_jSliderUmbralSStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabelImagenBin;
-    private javax.swing.JLabel jLabelUmbral;
-    private javax.swing.JSlider jSliderUmbral;
+    private javax.swing.JLabel jLabelUmbralI;
+    private javax.swing.JLabel jLabelUmbralS;
+    private javax.swing.JSlider jSliderUmbralI;
+    private javax.swing.JSlider jSliderUmbralS;
     // End of variables declaration//GEN-END:variables
 }

@@ -113,7 +113,9 @@ public class PrincipalJFrame extends javax.swing.JFrame {
        Image imagenReferencia = internalImagen.getImagenOriginal();
        // necesito obtener la referencia del internalframe con la imagen
        // se abra el frame de binarizacion
+       
        BinarizacionInternalFrame internalBin = new BinarizacionInternalFrame(imagenReferencia);
+       
        this.jDesktopPane1.add(internalBin);
        internalBin.setVisible(true);
        

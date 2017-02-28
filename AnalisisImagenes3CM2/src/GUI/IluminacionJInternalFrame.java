@@ -5,8 +5,6 @@
  */
 package GUI;
 
-import MUESTREO.InstanciaEnGrises;
-import MUESTREO.InstanciaImagenBinarizada;
 import ajustesespaciales.Iluminacion;
 import java.awt.Image;
 import javax.swing.ImageIcon;

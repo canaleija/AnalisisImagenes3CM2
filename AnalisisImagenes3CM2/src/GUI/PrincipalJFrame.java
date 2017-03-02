@@ -40,6 +40,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
         jMenuItemAbrirImagen = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,6 +82,14 @@ public class PrincipalJFrame extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Convolución");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -131,7 +140,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        JInternalFrameImagen internalImagen = (JInternalFrameImagen)jDesktopPane1.getSelectedFrame();
+       JInternalFrameImagen internalImagen = (JInternalFrameImagen)jDesktopPane1.getSelectedFrame();
        Image imagenReferencia = internalImagen.getImagenOriginal();
       
        IluminacionJInternalFrame internalIlu = new IluminacionJInternalFrame(imagenReferencia);
@@ -139,6 +148,16 @@ public class PrincipalJFrame extends javax.swing.JFrame {
        this.jDesktopPane1.add(internalIlu);
        internalIlu.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        JInternalFrameImagen internalImagen = (JInternalFrameImagen)jDesktopPane1.getSelectedFrame();
+       Image imagenReferencia = internalImagen.getImagenOriginal();
+      
+       ConvolucionJInternalFrame internalConvo = new ConvolucionJInternalFrame(imagenReferencia);
+       
+       this.jDesktopPane1.add(internalConvo);
+       internalConvo.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +201,7 @@ public class PrincipalJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemAbrirImagen;
     // End of variables declaration//GEN-END:variables
 }

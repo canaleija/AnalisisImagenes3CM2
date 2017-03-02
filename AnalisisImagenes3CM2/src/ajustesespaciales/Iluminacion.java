@@ -42,7 +42,7 @@ public class Iluminacion {
         return ImageType.toImage(aux);
     }
 
-    private static int verificaLimites(int valor) {
+    public static int verificaLimites(int valor) {
         if (valor<0){
           return 0;
         }

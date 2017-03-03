@@ -19,6 +19,7 @@ public class ConvolucionEspacial {
     
     private Image imagenOriginal;
     private BufferedImage imagenResultante;
+    private int desfase,divisor;
 
     public ConvolucionEspacial(Image imagenOriginal) {
       this.imagenOriginal = imagenOriginal;
@@ -27,9 +28,11 @@ public class ConvolucionEspacial {
                            BufferedImage.TYPE_INT_RGB);
     }
     
-    public Image convolucionar3x3(int [][] kernel){
+    public Image convolucionar3x3(int [][] kernel,int desfase,int divisor){
        BufferedImage auxOriginal = ImageType.toBufferedImage(imagenOriginal);
-       // recorrer la imagen para extraer
+       this.divisor = divisor;
+       this.desfase = desfase;
+// recorrer la imagen para extraer
        // la ventana de valores
        for (int x=1;x<auxOriginal.getWidth()-1;x++)
            for (int y=1;y<auxOriginal.getHeight()-1;y++){
@@ -83,9 +86,12 @@ public class ConvolucionEspacial {
              acumuladorVerde+=(kernel[x][y]*colorPixel.getGreen());
              acumuladorAzul+=(kernel[x][y]*colorPixel.getBlue());
             }
-//        acumuladorRojo/=9;
-//        acumuladorVerde/=9; 
-//        acumuladorAzul/=9;
+        acumuladorRojo/=this.divisor;
+        acumuladorVerde/=this.divisor; 
+        acumuladorAzul/=this.divisor;
+        acumuladorRojo+=this.desfase;
+        acumuladorVerde+=this.desfase; 
+        acumuladorAzul+=this.desfase;
         // validar los limites
         acumuladorRojo = Iluminacion.verificaLimites(acumuladorRojo);
         acumuladorVerde = Iluminacion.verificaLimites(acumuladorVerde);

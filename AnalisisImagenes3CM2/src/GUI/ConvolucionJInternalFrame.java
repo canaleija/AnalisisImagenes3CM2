@@ -79,7 +79,8 @@ public class ConvolucionJInternalFrame extends javax.swing.JInternalFrame {
        
         ConvolucionEspacial ce = new ConvolucionEspacial(imagenReferencia);
         //jLabelImagenBin.setIcon(new ImageIcon(ce.convolucionar3x3(new int[][]{(1,1,1),(1,1,1),(1,1,1)});
-        this.jLabelImagenBin.setIcon(new ImageIcon(ce.convolucionar3x3(new int [][]{{0,1,0},{1,-4,1},{0,1,0}})));
+        this.imagenReferencia = ce.convolucionar3x3(new int [][]{{1,1,1},{1,1,1},{1,1,1}},0,9);
+        this.jLabelImagenBin.setIcon(new ImageIcon(this.imagenReferencia));
     }//GEN-LAST:event_jButtonConvolucionarActionPerformed
 
 

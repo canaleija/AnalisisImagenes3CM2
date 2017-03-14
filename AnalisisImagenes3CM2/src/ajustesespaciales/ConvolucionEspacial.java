@@ -42,6 +42,7 @@ public class ConvolucionEspacial {
               // obtener el nuevo color del pixel 
              Color colorNuevo = generaConvolucion(ventana,kernel);
              this.imagenResultante.setRGB(x, y, colorNuevo.getRGB());
+             
              } else{
              // si es nulo dejamos igual el tono
              this.imagenResultante.setRGB(x, y,auxOriginal.getRGB(x, y));

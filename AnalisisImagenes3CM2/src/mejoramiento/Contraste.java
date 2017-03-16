@@ -63,6 +63,30 @@ public class Contraste {
     return ImageType.toImage(bi);
     }  
     
+  public Image expansionLogaritmica(int con){
+  
+       BufferedImage bi = ImageType.toBufferedImage(this.ioGrises.getImagenGrises());
+    for(int x=0;x<bi.getWidth();x++){
+      for(int y=0;y < bi.getHeight();y++){
+          // obtenemos el color original
+          Color color = new Color(bi.getRGB(x, y));
+          int tonoOriginal = color.getRed();
+          // implementamos la expansion para el tono original
+          
+          //int tonoNuevo = (int)(((255*Math.log(1+tonoOriginal))-1)/(Math.log(1+255)));
+          int tonoNuevo = (int)(con*(Math.log(1+tonoOriginal)));
+          tonoNuevo = Iluminacion.verificaLimites(tonoNuevo);
+          color = new Color(tonoNuevo, tonoNuevo, tonoNuevo);
+           // modificamos el color del pixel con el tono nuevo
+          bi.setRGB(x, y, color.getRGB());
+      }
+    }     
+    return ImageType.toImage(bi);
+  
+  
+      
+    
+  }
     
     
     

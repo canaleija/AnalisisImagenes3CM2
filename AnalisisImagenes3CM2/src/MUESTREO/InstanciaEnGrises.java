@@ -35,7 +35,7 @@ public class InstanciaEnGrises {
               int gris = (color.getRed()+color.getGreen()+color.getBlue())/3;
              
               // acumular la frecuencia del tono de gris
-              this.histrograma[gris]++;
+              this.getHistrograma()[gris]++;
               color = new Color(gris,gris,gris);
               aux.setRGB(x, y, color.getRGB());
             }
@@ -48,7 +48,7 @@ public class InstanciaEnGrises {
     public void graficarHistograma(){
       Grafica grafica = new Grafica("Histograma de Niveles de Grises (frecuencia de tonos)",
                   "Frecuencia", "Tono de Gris");
-      grafica.agregarSerie(this.histrograma, "Imagen1");
+      grafica.agregarSerie(this.getHistrograma(), "Imagen1");
       grafica.creaYmuestraGrafica();
     }
 
@@ -61,14 +61,14 @@ public class InstanciaEnGrises {
 
     private void calcularRango() {
         // recorremos el histograma 
-        for (int x=0; x < this.histrograma.length;x++){
-          if (this.histrograma[x]!=0){
+        for (int x=0; x < this.getHistrograma().length;x++){
+          if (this.getHistrograma()[x]!=0){
             this.nMin = x;
             break;
           }
         }
         for (int y=255; y>= 0;y--){
-          if (this.histrograma[y]!=0){
+          if (this.getHistrograma()[y]!=0){
             this.nMax = y;
             break;
           }
@@ -88,6 +88,13 @@ public class InstanciaEnGrises {
      */
     public int getnMax() {
         return nMax;
+    }
+
+    /**
+     * @return the histrograma
+     */
+    public double[] getHistrograma() {
+        return histrograma;
     }
     
     

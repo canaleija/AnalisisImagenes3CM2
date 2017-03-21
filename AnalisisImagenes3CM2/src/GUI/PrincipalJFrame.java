@@ -7,6 +7,8 @@ package GUI;
 
 import DATA.IOImage;
 import MUESTREO.InstanciaEnGrises;
+import MUESTREO.InstanciaImagenBinarizada;
+import MUESTREO.UmbralAutomatico;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -132,6 +134,21 @@ public class PrincipalJFrame extends javax.swing.JFrame {
             jDesktopPane1.add(aux);
             
             aux.setVisible(true);
+            // crear la imagen en grises 
+            InstanciaEnGrises gris = new InstanciaEnGrises(imagenOriginal);
+            Image iGris = gris.generaImagenGrises();
+            double histo[] = gris.getHistrograma();
+            UmbralAutomatico ua = new UmbralAutomatico(histo);
+            int uR = ua.metodoIterativo();
+            System.out.println(uR);
+            InstanciaImagenBinarizada ib = new InstanciaImagenBinarizada(iGris);
+            Image iBin = ib.generarImagenBinarizada(uR);
+            // creamos la instancia del internalframeimagen
+            JInternalFrameImagen aux2 = new JInternalFrameImagen(iBin);
+            
+            jDesktopPane1.add(aux2);
+            
+            aux2.setVisible(true);
             
     }//GEN-LAST:event_jMenuItemAbrirImagenActionPerformed
 
